@@ -13,6 +13,7 @@ print("TOP LEVEL IN ONE.PY")
 # else:
 #     print("ONE.PY has been imported!")
 
+# For code organization
 if __name__ == "__main__":
     func1()
     func2()
