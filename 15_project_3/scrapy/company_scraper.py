@@ -5,7 +5,7 @@ from spiders import TopStartupsSpider
 process = CrawlerProcess(
     settings={
         "FEEDS": {
-            "company_data.json": {"format": "jsonlines"},
+            "company_data.json": {"format": "json"},
         },
     }
 )
