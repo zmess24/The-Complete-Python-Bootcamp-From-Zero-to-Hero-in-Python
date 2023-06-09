@@ -9,8 +9,7 @@ process = CrawlerProcess(get_project_settings())
 with open('company_data.json') as file:
          data = json.load(file)
 
-start_urls = [company['job_board'] for company in data if 'lever' in company['job_board']]
+lever_start_urls = [company['job_board'] for company in data if 'lever' in company['job_board']]
 
-print(start_urls)
-# process.crawl('jobs', job_board="greenhouse", start_urls=start_urls)
+process.crawl('jobs', job_board_name="lever", start_urls=lever_start_urls)
 process.start()  # the script will block here until the crawling is finished

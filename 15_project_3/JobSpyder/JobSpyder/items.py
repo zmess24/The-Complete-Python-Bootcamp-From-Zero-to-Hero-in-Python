@@ -13,3 +13,9 @@ class CompanyItem(scrapy.Item):
     industries = scrapy.Field()
     job_board = scrapy.Field()
     open_roles = scrapy.Field()
+
+class RoleItem(scrapy.Item):
+    title = scrapy.Field()
+    location = scrapy.Field()
+    link = scrapy.Field()
+    department = scrapy.Field()
