@@ -5,6 +5,14 @@ class TopStartupsSpider(scrapy.Spider):
     name = 'topstartupsspider'
     start_urls = ['https://topstartups.io/?industries=Artificial+Intelligence&industries=Analytics&industries=Biotech&industries=Collaboration&industries=Consumer&industries=Crypto&industries=Cybersecurity&industries=Data+Science&industries=E-Commerce&industries=EdTech&industries=Enterprise+Software&industries=FinTech&industries=Gaming&industries=Hardware&industries=Healthcare&industries=Marketplace&industries=Media&industries=Retail&industries=SaaS&industries=Sales&industries=Space&industries=Sustainability']
 
+    def sanitize_url(self, url):
+        if url == None:
+            return url
+        elif "?" in url:
+            return url.split('?')[0]
+        else:
+            return url
+
     def parse(self, response):
         COMPANY_SELCTOR  = "#item-card-filter"
         NAME_SELECTOR = "h3::text"
@@ -16,10 +24,11 @@ class TopStartupsSpider(scrapy.Spider):
 
         for company in response.css(COMPANY_SELCTOR):
             if company.css(NAME_SELECTOR).extract_first() != None and company.css(COMPANY_LINK_SELCTOR).extract_first() != None:
+
                 yield {
                     'name': company.css(NAME_SELECTOR).extract_first(),
-                    'company_link': company.css(COMPANY_LINK_SELCTOR).extract_first(),
-                    'job_board': company.css(JOB_LINK_SELECTOR).extract_first(),
+                    'company_link': self.sanitize_url(company.css(COMPANY_LINK_SELCTOR).extract_first()),
+                    'job_board': self.sanitize_url(company.css(JOB_LINK_SELECTOR).extract_first()),
                     'logo': company.css(LOGO_SELECTOR).extract_first()
                 }
 
@@ -29,7 +38,7 @@ class TopStartupsSpider(scrapy.Spider):
 process = CrawlerProcess(
     settings={
         "FEEDS": {
-            "company_data.json": {"format": "json"},
+            "company_data.json": {"format": "json", "overwrite": True },
         },
     }
 )
