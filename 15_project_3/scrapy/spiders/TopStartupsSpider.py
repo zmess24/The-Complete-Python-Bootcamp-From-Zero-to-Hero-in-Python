@@ -7,7 +7,7 @@ class TopStartupsSpider(scrapy.Spider):
 
     def sanitize_url(self, url):
         if url == None:
-            return url
+            return ""
         elif "?" in url:
             return url.split('?')[0]
         else:
