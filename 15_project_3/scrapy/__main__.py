@@ -5,4 +5,5 @@ file = open('company_data.json', 'r')
 
 parsed = json.load(file)
 
-print(parsed)
+for company in parsed:
+    print(company['name'])
