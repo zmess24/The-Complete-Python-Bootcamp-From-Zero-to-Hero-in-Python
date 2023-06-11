@@ -3,19 +3,20 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from dataclasses import dataclass
 
+@dataclass
+class CompanyItem():
+    name: str
+    company_link: str
+    logo: str
+    industries: str
+    job_board: str
+    open_roles: list
 
-class CompanyItem(scrapy.Item):
-    name = scrapy.Field()
-    company_link = scrapy.Field()
-    logo = scrapy.Field()
-    industries = scrapy.Field()
-    job_board = scrapy.Field()
-    open_roles = scrapy.Field()
-
-class RoleItem(scrapy.Item):
-    title = scrapy.Field()
-    location = scrapy.Field()
-    link = scrapy.Field()
-    department = scrapy.Field()
+@dataclass
+class RoleItem():
+    title: str
+    location: str
+    department: str
+    link: str
