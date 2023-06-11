@@ -4,12 +4,12 @@ import json
 
 process = CrawlerProcess(get_project_settings())
 
-# process.crawl("company")
+process.crawl("company")
 
-with open('company_data.json') as file:
-         data = json.load(file)
+# with open('company_data.json') as file:
+#          data = json.load(file)
 
-for company in data:
-        print(company["open_roles"])
+# for company in data:
+#         print(company["open_roles"])
 
 process.start()  # the script will block here until the crawling is finished
